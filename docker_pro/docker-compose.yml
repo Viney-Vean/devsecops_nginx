@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  nginx:
+    build:
+      context: ..
+      dockerfile: docker_pro/nginx.Dockerfile
+    container_name: nginx_container
+    ports:
+      # Port FastAPI
+      - "8000:80"
+      # Port Postgresql
+      - "5454:5454"
+      # Port pgAdmin
+      - "5050:5050"
+    restart: always
+
+volumes:
+  nginx_data:
+
