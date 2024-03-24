@@ -23,10 +23,6 @@ services:
       # Port FastAPI
       - "80:80"
       - "443:443"
-      # Port Postgresql
-#      - "5454:5454"
-      # Port pgAdmin
-#      - "5050:5050"
     restart: always
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
