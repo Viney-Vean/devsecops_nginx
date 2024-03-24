@@ -39,7 +39,7 @@ services:
       - ./nginx/conf/:/etc/nginx/conf.d/:ro  # Mount your Nginx configuration directory
       - ./certbot/etc/letsencrypt:/etc/letsencrypt  # Persist certificates
       - ./certbot/var/lib/letsencrypt:/var/lib/letsencrypt  # Persist certificates
-    command: [ "certonly", "--webserver", "nginx", "--agree-tos", "--email", "viney.vean@gmail.com", "-d", "viney.cloud", "-d", "www.viney.cloud" ]
+    command: [ "certonly", "--nginx", "nginx", "--agree-tos", "--email", "viney.vean@gmail.com", "-d", "viney.cloud", "-d", "www.viney.cloud" ]
 
 
 volumes:
