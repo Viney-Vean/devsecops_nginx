@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  fastapi:
+    container_name: "fastapi_container"
+    build:
+      context: ..
+      dockerfile: docker_pro/fastapi.Dockerfile
+    environment:
+      - MODULE_NAME=main
+      - VARIABLE_NAME=app
+      - ASGI_SERVER=uvicorn
+      - UVICORN_CMD="uvicorn main:app --host 0.0.0.0 --port 80 --workers 4"
+      - GUNICORN_CMD="gunicorn -k uvicorn.workers.UvicornWorker -w 4 main:app -b 0.0.0.0:80"
+    restart: always
+
+  nginx:
+    build:
+      context: ..
+      dockerfile: docker_pro/nginx.Dockerfile
+    container_name: nginx_container
+    ports:
+      # Port FastAPI
+      - "80:80"
+      - "443:443"
+      # Port Postgresql
+#      - "5454:5454"
+      # Port pgAdmin
+#      - "5050:5050"
+    restart: always
+
+volumes:
+  nginx_data:
+
