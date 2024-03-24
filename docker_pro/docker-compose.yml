@@ -27,20 +27,9 @@ services:
 #      - "5454:5454"
       # Port pgAdmin
 #      - "5050:5050"
+    restart: always
     volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro  # Mount your Nginx configuration directory
-      - ./certbot/etc/letsencrypt:/etc/letsencrypt  # Persist certificates
-      - ./certbot/var/lib/letsencrypt:/var/lib/letsencrypt  # Persist certificates
-    restart: unless-stopped  # Restart the container only if it exits abnormally
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro  # Mount your Nginx configuration directory
-      - ./certbot/etc/letsencrypt:/etc/letsencrypt  # Persist certificates
-      - ./certbot/var/lib/letsencrypt:/var/lib/letsencrypt  # Persist certificates
-    command: [ "certonly", "--nginx", "nginx", "--agree-tos", "--email", "viney.vean@gmail.com", "-d", "viney.cloud", "-d", "www.viney.cloud" ]
-
+      - /etc/letsencrypt:/etc/letsencrypt
 
 volumes:
   nginx_data:
