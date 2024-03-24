@@ -21,7 +21,7 @@ services:
     container_name: nginx_container
     ports:
       # Port FastAPI
-      - "8110:80"
+      - "80:80"
       # Port Postgresql
 #      - "5454:5454"
       # Port pgAdmin
